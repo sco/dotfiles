@@ -3,10 +3,11 @@
 " ---------------------------------------------------------------------------
 
 set nocompatible          " no legacy compat. must be first.
-set modelines=0           " prevent modelines security exploits by disabling them
 
 call pathogen#infect()
 filetype plugin indent on " load file type plugins + indentation
+
+set modelines=0           " prevent modelines security exploits by disabling them
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -16,18 +17,18 @@ syntax on
 colorscheme desert
 
 set encoding=utf-8
-set scrolloff=3            " provide some context when editing
+set scrolloff=8            " provide context when editing
 set autoread               " reload files (no local changes only)
-set showmode
+set showmode               " Show current mode down the bottom
 set hidden                 " Hide buffers when they are abandoned
 set cursorline
-set laststatus=2
+set laststatus=2           " Show the status line all the time
 set ruler                  " show the cursor position all the time
 set ttyfast                " we have a fast terminal
 set showcmd                " display incomplete commands
 set nolazyredraw           " turn off lazy redraw
 "set number                " line numbers
-set relativenumber
+set relativenumber         " show relative line numbers
 set wildmenu               " turn on wild menu :e <Tab>
 set wildmode=list:longest,full
 set ch=2                   " command line height
@@ -122,8 +123,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " swap ; and : so that you don't need shift to enter commandline mode
-nore ; :
-nore , ;
+"nore ; :
+"nore , ;
 
 " ---------------------------------------------------------------------------
 " Autocommands 
