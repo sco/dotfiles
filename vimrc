@@ -12,8 +12,11 @@ filetype plugin indent on " load file type plugins + indentation
 "  UI
 " ----------------------------------------------------------------------------
 
+syntax on
+colorscheme desert
+
 set encoding=utf-8
-set scrolloff=3
+set scrolloff=3            " provide some context when editing
 set autoread               " reload files (no local changes only)
 set showmode
 set hidden                 " Hide buffers when they are abandoned
@@ -44,9 +47,11 @@ set showmatch              " brackets/braces that is
 set mat=5                  " duration to show matching brace (1/10 sec)
 set laststatus=2           " always show the status line
 set visualbell             " shut the fuck up
+
+set hlsearch               " highlight matches
+set incsearch              " incremental searching
 set ignorecase             " searches are case insensitive...
 set smartcase              " ... unless they contain at least one capital letter
-set incsearch              " incremental searching
 
 " ----------------------------------------------------------------------------
 "  Text Formatting
@@ -58,6 +63,10 @@ set nowrap                 " don't wrap lines
 set tabstop=4 shiftwidth=4 " a tab is two spaces (or set this to 4)
 set softtabstop=4
 set expandtab              " use spaces, not tabs (optional)
+
+" show invisible chars
+"set list
+"set listchars=tab:▸\ ,eol:¬
 
 " ----------------------------------------------------------------------------
 "  Backups
@@ -72,32 +81,21 @@ set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
 set directory=~/.vim/swap,~/tmp,.      " keep swp files under ~/.vim/swap
 
 " ---------------------------------------------------------------------------
-" Appearance 
-" ---------------------------------------------------------------------------
-
-syntax on
-"set background=dark
-set hlsearch    " highlight matches
-colorscheme desert
-
-" show invisible chars
-"set list
-"set listchars=tab:▸\ ,eol:¬
-
-" ---------------------------------------------------------------------------
 " Mappings 
 " ---------------------------------------------------------------------------
 
-nnoremap <leader><space> :noh<cr>
+" remap leader key from default '\'
+let mapleader = ","
+
+" clear search buffer on return
+nnoremap <CR> :noh<cr>
+
 nnoremap <tab> %
 vnoremap <tab> %
 
 " start searches with \v to disable vim-specific regex
 nnoremap / /\v
 vnoremap / /\v
-
-" remap leader key from default '\'
-let mapleader = ","
 
 " disable arrow keys (force me to do the right thing)
 nnoremap <up> <nop>
