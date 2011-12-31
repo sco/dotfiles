@@ -1,67 +1,102 @@
-" good reference:
-" http://mislav.uniqpath.com/2011/12/vim-revisited/
-" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#getting-started
-" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
-" http://mislav.uniqpath.com/2011/12/vim-revisited/
+" ---------------------------------------------------------------------------
+" General
+" ---------------------------------------------------------------------------
 
-" installing pathogen:
-" mkdir -p ~/.vim/autoload ~/.vim/bundle; \
-" curl -so ~/.vim/autoload/pathogen.vim \
-"     https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+set nocompatible          " no legacy compat. must be first.
+set modelines=0           " prevent modelines security exploits by disabling them
 
-" load pathogen
 call pathogen#infect()
-syntax on
 filetype plugin indent on " load file type plugins + indentation
 
-" standard stuff
-set nocompatible    " no legacy vi compatibility
-set modelines=0     " prevent modelines security exploits by disabling them
+" ----------------------------------------------------------------------------
+"  UI
+" ----------------------------------------------------------------------------
+
 set encoding=utf-8
 set scrolloff=3
-set autoindent
+set autoread               " reload files (no local changes only)
 set showmode
-set showcmd         " Show (partial) command in status line
-set hidden          " Hide buffers when they are abandoned
-set wildmenu        " turn on wild menu :e <Tab>
-set wildmode=list:longest
-set visualbell      " 
+set hidden                 " Hide buffers when they are abandoned
 set cursorline
-set ttyfast         " we have a fast terminal
-set ruler           " show the line number on the bar
 set laststatus=2
+set ruler                  " show the cursor position all the time
+set ttyfast                " we have a fast terminal
+set showcmd                " display incomplete commands
+set nolazyredraw           " turn off lazy redraw
+"set number                " line numbers
 set relativenumber
+set wildmenu               " turn on wild menu :e <Tab>
+set wildmode=list:longest,full
+set ch=2                   " command line height
+set backspace=2            " allow backspacing over everything in insert mode
+set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set shortmess=filtIoOA     " shorten messages
+set report=0               " tell us about changes
+set nostartofline          " don't jump to the start of line when scrolling
+set gdefault               " substitutions are global on lines
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
-" appearance
-colorscheme Mustang 
-set background=dark
-set gfn=Monaco:h14
+" ----------------------------------------------------------------------------
+" Visual Cues
+" ----------------------------------------------------------------------------
+
+set showmatch              " brackets/braces that is
+set mat=5                  " duration to show matching brace (1/10 sec)
+set laststatus=2           " always show the status line
+set visualbell             " shut the fuck up
+set ignorecase             " searches are case insensitive...
+set smartcase              " ... unless they contain at least one capital letter
+set incsearch              " incremental searching
+
+" ----------------------------------------------------------------------------
+"  Text Formatting
+" ----------------------------------------------------------------------------
+
+set autoindent
+set smartindent
+set nowrap                 " don't wrap lines
+set tabstop=4 shiftwidth=4 " a tab is two spaces (or set this to 4)
+set softtabstop=4
+set expandtab              " use spaces, not tabs (optional)
+
+" ----------------------------------------------------------------------------
+"  Backups
+" ----------------------------------------------------------------------------
+
+set nobackup                           " do not keep backups after close
+set nowritebackup                      " do not keep a backup while working
+set noswapfile                         " don't keep swp files either
+set backupdir=$HOME/.vim/backup        " store backups under ~/.vim/backup
+set backupcopy=yes                     " keep attributes of original file
+set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
+set directory=~/.vim/swap,~/tmp,.      " keep swp files under ~/.vim/swap
+
+" ---------------------------------------------------------------------------
+" Appearance 
+" ---------------------------------------------------------------------------
+
+syntax on
+"set background=dark
+set hlsearch    " highlight matches
+colorscheme desert
 
 " show invisible chars
 "set list
 "set listchars=tab:▸\ ,eol:¬
 
-" Whitespace
-set nowrap          " don't wrap lines
-set tabstop=4 shiftwidth=4 " a tab is two spaces (or set this to 4)
-set softtabstop=4
-set expandtab       " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
+" ---------------------------------------------------------------------------
+" Mappings 
+" ---------------------------------------------------------------------------
 
-" Searching/moving
-nnoremap / /\v
-vnoremap / /\v
-set gdefault    " substitutions are global on lines
-set showmatch   " Show matching brackets
-set hlsearch    " highlight matches
-set incsearch   " incremental searching
-set ignorecase  " searches are case insensitive...
-set smartcase   " ... unless they contain at least one capital letter
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" remap leader key from default '/'
+" start searches with \v to disable vim-specific regex
+nnoremap / /\v
+vnoremap / /\v
+
+" remap leader key from default '\'
 let mapleader = ","
 
 " disable arrow keys (force me to do the right thing)
@@ -75,9 +110,6 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
-
-" auto save on focus lost
-"au FocusLost * :wa
 
 " map 'jj' to ESC in insert mode for quicker exiting
 inoremap jj <ESC>
@@ -95,7 +127,39 @@ nnoremap <C-l> <C-w>l
 nore ; :
 nore , ;
 
-" PDI:
+" ---------------------------------------------------------------------------
+" Autocommands 
+" ---------------------------------------------------------------------------
+
+" auto save on focus lost
+"au FocusLost * :wa
+
+" ---------------------------------------------------------------------------
+" Filetypes 
+" ---------------------------------------------------------------------------
+
+" Set File type to 'text' for files ending in .txt
+autocmd BufNewFile,BufRead *.txt setfiletype text 
+
+" Enable soft-wrapping for text files
+autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
+
+" ---------------------------------------------------------------------------
+"  Open URL on current line in browser
+" ---------------------------------------------------------------------------
+
+function! Browser ()
+    let line0 = getline (".")
+    let line = matchstr (line0, "http[^ )]*")
+    let line = escape (line, "#?&;|%")
+    exec ':silent !open ' . "\"" . line . "\""
+endfunction
+map ,w :call Browser ()<CR>
+
+" ---------------------------------------------------------------------------
+" PDI
+" ---------------------------------------------------------------------------
+
 " peepopen
 " nerdtree
 " lusty explorer
@@ -113,4 +177,16 @@ nore , ;
 " endwise
 " markdown
 " coffee-script
+
+" ---------------------------------------------------------------------------
+" Reference
+" ---------------------------------------------------------------------------
+
+" http://mislav.uniqpath.com/2011/12/vim-revisited/
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#getting-started
+" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
+" http://mislav.uniqpath.com/2011/12/vim-revisited/
+" https://github.com/ryanb/dotfiles
+" https://github.com/rtomayko/dotfiles/blob/rtomayko/.vimrc
+
 
