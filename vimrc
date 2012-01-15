@@ -8,6 +8,7 @@ call pathogen#infect()
 filetype plugin indent on " load file type plugins + indentation
 
 set modelines=0           " prevent modelines security exploits by disabling them
+set encoding=utf-8
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -16,12 +17,11 @@ set modelines=0           " prevent modelines security exploits by disabling the
 syntax on
 colorscheme desert
 
-set encoding=utf-8
 set scrolloff=8            " provide context when editing
 set autoread               " reload files (no local changes only)
 set showmode               " Show current mode down the bottom
 set hidden                 " Hide buffers when they are abandoned
-set cursorline
+"set cursorline             " highlight current line
 set laststatus=2           " Show the status line all the time
 set ruler                  " show the cursor position all the time
 set ttyfast                " we have a fast terminal
@@ -107,7 +107,10 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-nnoremap j gj
+
+
+" what do these do?
+"nnoremap j gj<CR>
 nnoremap k gk
 
 " map 'jj' to ESC in insert mode for quicker exiting
@@ -117,11 +120,13 @@ inoremap jj <ESC>
 nnoremap <leader>w <C-w>v<C-w>l
 
 " map <C-[h/j/k/l]> to move around splits
-nnoremap <C-h> <C-w>h
+"nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" map <C-h> to :FufHelp (fuzzyfinder help)
+nnoremap <C-h> :FufHelp<CR>
 " swap ; and : so that you don't need shift to enter commandline mode
 "nore ; :
 "nore , ;
@@ -153,7 +158,7 @@ function! Browser ()
     let line = escape (line, "#?&;|%")
     exec ':silent !open ' . "\"" . line . "\""
 endfunction
-map ,w :call Browser ()<CR>
+map <leader>w :call Browser ()<CR>
 
 " ---------------------------------------------------------------------------
 " PDI
@@ -187,5 +192,4 @@ map ,w :call Browser ()<CR>
 " http://mislav.uniqpath.com/2011/12/vim-revisited/
 " https://github.com/ryanb/dotfiles
 " https://github.com/rtomayko/dotfiles/blob/rtomayko/.vimrc
-
 
