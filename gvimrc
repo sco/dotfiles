@@ -1,5 +1,4 @@
-color Mustang 
-set columns=100
+set columns=120
 set lines=65
 set gfn=Menlo\ Regular:h15
 set linespace=2

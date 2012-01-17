@@ -14,9 +14,11 @@ set encoding=utf-8
 "  UI
 " ----------------------------------------------------------------------------
 
-syntax on
-colorscheme desert
+syntax enable
+set background=dark
+colorscheme solarized
 
+set encoding=utf-8
 set scrolloff=8            " provide context when editing
 set autoread               " reload files (no local changes only)
 set showmode               " Show current mode down the bottom
