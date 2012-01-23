@@ -23,13 +23,12 @@ set scrolloff=8            " provide context when editing
 set autoread               " reload files (no local changes only)
 set showmode               " Show current mode down the bottom
 set hidden                 " Hide buffers when they are abandoned
-"set cursorline             " highlight current line
+set cursorline             " highlight current line
 set laststatus=2           " Show the status line all the time
 set ruler                  " show the cursor position all the time
 set ttyfast                " we have a fast terminal
 set showcmd                " display incomplete commands
-set nolazyredraw           " turn off lazy redraw
-"set number                " line numbers
+#set nolazyredraw           " turn off lazy redraw
 set relativenumber         " show relative line numbers
 set wildmenu               " turn on wild menu :e <Tab>
 set wildmode=list:longest,full
@@ -68,8 +67,8 @@ set softtabstop=2
 set expandtab              " use spaces, not tabs (optional)
 
 " show invisible chars
-"set list
-"set listchars=tab:▸\ ,eol:¬
+set list
+set listchars=tab:▸\ ,eol:¬
 
 " ----------------------------------------------------------------------------
 "  Backups
@@ -110,7 +109,6 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-
 " what do these do?
 "nnoremap j gj<CR>
 nnoremap k gk
@@ -129,23 +127,20 @@ nnoremap <C-l> <C-w>l
 
 " map <C-h> to :FufHelp (fuzzyfinder help)
 nnoremap <C-h> :FufHelp<CR>
-" swap ; and : so that you don't need shift to enter commandline mode
-"nore ; :
-"nore , ;
 
 " ---------------------------------------------------------------------------
-" Autocommands 
+" Autocommands
 " ---------------------------------------------------------------------------
 
 " auto save on focus lost
 "au FocusLost * :wa
 
 " ---------------------------------------------------------------------------
-" Filetypes 
+" Filetypes
 " ---------------------------------------------------------------------------
 
 " Set File type to 'text' for files ending in .txt
-autocmd BufNewFile,BufRead *.txt setfiletype text 
+autocmd BufNewFile,BufRead *.txt setfiletype text
 
 " Enable soft-wrapping for text files
 autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
