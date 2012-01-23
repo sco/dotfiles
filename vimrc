@@ -29,7 +29,7 @@ set ruler                  " show the cursor position all the time
 set ttyfast                " we have a fast terminal
 set showcmd                " display incomplete commands
 "set nolazyredraw           " turn off lazy redraw
-if has("relativenumber")
+if v:version >= 703
   set relativenumber       " show relative line numbers
 else
   set number               " show line numbers
@@ -170,7 +170,9 @@ map <leader>w :call Browser ()<CR>
 " lusty explorer
 " command-t
 " nerdcommenter
+" nerdtree
 " tpope's commenter
+" bufexplorer
 " ack
 " snipmate
 " yankring
