@@ -28,8 +28,12 @@ set laststatus=2           " Show the status line all the time
 set ruler                  " show the cursor position all the time
 set ttyfast                " we have a fast terminal
 set showcmd                " display incomplete commands
-#set nolazyredraw           " turn off lazy redraw
-set relativenumber         " show relative line numbers
+"set nolazyredraw           " turn off lazy redraw
+if has("relativenumber")
+  set relativenumber       " show relative line numbers
+else
+  set number               " show line numbers
+endif
 set wildmenu               " turn on wild menu :e <Tab>
 set wildmode=list:longest,full
 set ch=2                   " command line height
