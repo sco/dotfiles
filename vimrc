@@ -1,18 +1,12 @@
-" ---------------------------------------------------------------------------
-" General
-" ---------------------------------------------------------------------------
+" ### General
 
 set nocompatible          " no legacy compat. must be first.
-
-call pathogen#infect()
+call pathogen#infect()    " load pathgen bundles
 filetype plugin indent on " load file type plugins + indentation
-
 set modelines=0           " prevent modelines security exploits by disabling them
 set encoding=utf-8
 
-" ----------------------------------------------------------------------------
-"  UI
-" ----------------------------------------------------------------------------
+" ### UI
 
 syntax enable
 set background=dark
@@ -45,9 +39,7 @@ set nostartofline          " don't jump to the start of line when scrolling
 set gdefault               " substitutions are global on lines
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
+" ### Visual Cues
 
 set showmatch              " brackets/braces that is
 set mat=5                  " duration to show matching brace (1/10 sec)
@@ -59,9 +51,7 @@ set incsearch              " incremental searching
 set ignorecase             " searches are case insensitive...
 set smartcase              " ... unless they contain at least one capital letter
 
-" ----------------------------------------------------------------------------
-"  Text Formatting
-" ----------------------------------------------------------------------------
+" ### Text Formatting
 
 set autoindent
 set smartindent
@@ -74,9 +64,7 @@ set expandtab              " use spaces, not tabs (optional)
 set list
 set listchars=tab:▸\ ,eol:¬
 
-" ----------------------------------------------------------------------------
-"  Backups
-" ----------------------------------------------------------------------------
+" ### Backups
 
 set nobackup                           " do not keep backups after close
 set nowritebackup                      " do not keep a backup while working
@@ -86,9 +74,7 @@ set backupcopy=yes                     " keep attributes of original file
 set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
 set directory=~/.vim/swap,~/tmp,.      " keep swp files under ~/.vim/swap
 
-" ---------------------------------------------------------------------------
-" Mappings 
-" ---------------------------------------------------------------------------
+" ### Mappings 
 
 " remap leader key from default '\'
 let mapleader = ","
@@ -132,16 +118,12 @@ nnoremap <C-l> <C-w>l
 " map <C-h> to :FufHelp (fuzzyfinder help)
 nnoremap <C-h> :FufHelp<CR>
 
-" ---------------------------------------------------------------------------
-" Autocommands
-" ---------------------------------------------------------------------------
+" ### Autocommands
 
 " auto save on focus lost
 "au FocusLost * :wa
 
-" ---------------------------------------------------------------------------
-" Filetypes
-" ---------------------------------------------------------------------------
+" ### Filetypes
 
 " Set File type to 'text' for files ending in .txt
 autocmd BufNewFile,BufRead *.txt setfiletype text
@@ -149,9 +131,7 @@ autocmd BufNewFile,BufRead *.txt setfiletype text
 " Enable soft-wrapping for text files
 autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
 
-" ---------------------------------------------------------------------------
-"  Open URL on current line in browser
-" ---------------------------------------------------------------------------
+" ### Open URL on current line in browser
 
 function! Browser ()
     let line0 = getline (".")
@@ -161,9 +141,7 @@ function! Browser ()
 endfunction
 map <leader>w :call Browser ()<CR>
 
-" ---------------------------------------------------------------------------
-" PDI
-" ---------------------------------------------------------------------------
+" ### PDI
 
 " peepopen
 " nerdtree
@@ -185,9 +163,7 @@ map <leader>w :call Browser ()<CR>
 " markdown
 " coffee-script
 
-" ---------------------------------------------------------------------------
-" Reference
-" ---------------------------------------------------------------------------
+" ### Reference
 
 " http://mislav.uniqpath.com/2011/12/vim-revisited/
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#getting-started
