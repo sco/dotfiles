@@ -3,7 +3,9 @@
   email = scottr@fb.com
 [github]
   user = sco
-  #token = SECRET
+  token = 599162be55b3bfc3e9641a241dbc64ea
+#[heroku]
+#	account = personal
 [color]
   status = auto
   diff = auto
@@ -29,6 +31,7 @@
   st = status
   ci = commit
   co = checkout
+  refuck = rebase
   staged = diff --cached
   unstaged = diff
   both = diff HEAD
@@ -44,7 +47,7 @@
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
-  pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
+  #pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [merge]
   tool = opendiff
 [merge "pofile"]
@@ -65,7 +68,5 @@
 [push]
   # push current branch even if you've never pushed it before
   default = current
-#[heroku]
-#	account = personal
 [mergetool]
 	keepBackup = false
