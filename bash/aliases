@@ -1,0 +1,24 @@
+#alias sh='rlwrap sh'
+#
+#ex() {
+#       nohup "$@" >/dev/null 2>&1 <&1 & disown %%
+#}
+#
+#getdir() {
+#       if [ ! $1 ]; then
+#               echo "Usage: getdir "
+#       else
+#               if [ ! -e $1 ]; then mkdir -p $1; fi
+#               cd $1
+#       fi
+#}
+#
+#getsrc() {
+#       if [ ! $1 ]; then
+#               echo "Usage: getsrc "
+#       else
+#               getdir $1
+#               apt-get source $1
+#       fi
+#}
+

@@ -1,0 +1,5 @@
+#export PATH="~/bin:~/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+
+export PATH=/Users/scottr/bin:/Users/scottr/.bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+

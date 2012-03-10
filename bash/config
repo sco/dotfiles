@@ -1,0 +1,13 @@
+#PS1="[\u@\h \W\$(git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/{\1}/')]\$ "
+#PS1="[\u@`uname -n | sed 's/.thefacebook.com//'` \w] "
+#export PS1="\w$ "
+PS1="[\u@\h \w \$(git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/{\1}/')]\$ "
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+fi
+
+export EDITOR=/usr/bin/vim
+

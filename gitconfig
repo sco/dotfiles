@@ -25,23 +25,37 @@
   changed = green
   untracked = cyan
 [alias]
-  br = branch
-  df = diff
-  lg = log -p
+  br = branch -v    # show branches verbosely
   st = status
   ci = commit
+  amend = commit --amend
   co = checkout
-  refuck = rebase
+  nb = checkout -b  # create and switch to a new branch
+  plre = pull --rebase
+  pom = push origin master
+
+  # rebase
+  rc = rebase --continue            # continue rebase
+  refuck = rebase   # for the lulz
+
+  # diff
+  df = diff
   staged = diff --cached
   unstaged = diff
+  last = diff HEAD^ # diff last committed change
   both = diff HEAD
-  logline = log --pretty=oneline
-  amend = commit --amend
-  plre = pull --rebase
+
+  # reset
+  undo = reset --soft HEAD^
   unstage = reset HEAD
+
+  # log
+  lg = log -p
+  logline = log --pretty=oneline
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-  me = log --author='Matthew Hutchinson'
+  me = log --author='Scott Raymond'
+
   # automatically commit change and pre-configure the rebase prompt to fold it into the last commit
   fix = "!f() { git commit -a -m \"fixup! $(git log -1 --pretty=format:%s)\" && git rebase -i --autosquash HEAD~4; }; f"
 [format]
