@@ -75,6 +75,7 @@
 #  legacyheaders = false
 #  excludesfile = /Users/matt/.gitignore
   editor = vim
+	trustctime = false
 [repack]
   usedeltabaseoffset = true
 [apply]
