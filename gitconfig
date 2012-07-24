@@ -1,6 +1,6 @@
 [user]
-  name = Scott Raymond
-  email = scottr@fb.com
+	name = Scott Raymond
+	email = scottr@fb.com
 [github]
   user = sco
   token = 599162be55b3bfc3e9641a241dbc64ea
@@ -28,6 +28,7 @@
   br = branch -v    # show branches verbosely
   st = status
   ci = commit
+  cp = cherry-pick
   amend = commit --amend
   co = checkout
   nb = checkout -b  # create and switch to a new branch
