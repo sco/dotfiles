@@ -22,3 +22,4 @@
 #       fi
 #}
 
+alias bb='open ~/repos/iphone/Airbnb.xcodeproj'

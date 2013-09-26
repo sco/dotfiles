@@ -1,6 +1,8 @@
 [user]
 	name = Scott Raymond
-	email = scottr@fb.com
+	email = scott.raymond@airbnb.com
+[credential]
+  helper = osxkeychain
 [github]
   user = sco
   token = 599162be55b3bfc3e9641a241dbc64ea
@@ -11,6 +13,7 @@
   diff = auto
   branch = auto
   interactive = auto
+  ui = auto
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -84,5 +87,7 @@
 [push]
   # push current branch even if you've never pushed it before
   default = current
+[rerere]
+  enabled = 1
 [mergetool]
 	keepBackup = false
