@@ -22,4 +22,4 @@
 #       fi
 #}
 
-alias bb='open ~/repos/iphone/Airbnb.xcodeproj'
+alias bb='open ~/repos/ios/Airbnb.xcworkspace'

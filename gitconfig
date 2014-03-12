@@ -2,7 +2,7 @@
 	name = Scott Raymond
 	email = scott.raymond@airbnb.com
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 [github]
   user = sco
   token = 599162be55b3bfc3e9641a241dbc64ea
@@ -91,3 +91,6 @@
   enabled = 1
 [mergetool]
 	keepBackup = false
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

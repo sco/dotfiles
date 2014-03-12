@@ -2,4 +2,6 @@
 
 export PATH=/Users/scottr/bin:/Users/scottr/.bin:$PATH
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
+export PATH=$PATH:/Applications/AWS-ElasticBeanstalk-CLI-2.5.1/eb/macosx/python2.7
+export PATH=$PATH:/Users/sco/adt-bundle-mac-x86_64-20131030/sdk/platform-tools
+export PATH=$PATH:/Applications/Postgres93.app/Contents/MacOS/bin

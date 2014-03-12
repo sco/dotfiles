@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/sco/work/gathering-node'
 let g:netrw_dirhist_2='/Users/sco/work/gowalla-archive'
 let g:netrw_dirhist_3='/Users/sco/work/gowalla-archive/views'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/sco/work/gowalla-archive'
 let g:netrw_dirhist_5='/Users/scottr/.ssh'
 let g:netrw_dirhist_6='/Users/scottr/repos/fbobjc/Apps/Snap/Snap'
 let g:netrw_dirhist_7='/Users/sco/.dotfiles/bash'
+let g:netrw_dirhist_8='/Users/sco/.bash'
