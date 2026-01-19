@@ -17,4 +17,8 @@ This repo is meant for use with "dotfiles"(TODO link). To manage dotfiles, use c
     dotfiles commit -m "Add shell and Neovim config"
 
 
+### connecting to other machines
+- `tailscale status
+- `ssh sco@raymond-maxi`
 
+- 
