@@ -1,0 +1,2 @@
+#!/home/sco/.bun/bin/bun
+console.log('hello, world')
