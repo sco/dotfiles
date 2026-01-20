@@ -28,6 +28,15 @@ To set up a new machine, install git and add your SSH key to Github. Then:
 
     tailscale status
     ssh sco@raymond-maxi
+    tmux ls
     tmux attach -t default
 
-- 
+-### Further home environment setup
+
+    gh auth login
+
+### checking out a project repo
+
+    gh repo clone furnisher
+
+ 

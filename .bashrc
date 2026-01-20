@@ -137,3 +137,8 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # SSH shortcuts
 alias maxi='ssh sco@raymond-maxi'
+
+# Auto-attach to tmux for SSH sessions
+if [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && command -v tmux &> /dev/null; then
+    tmux new-session -A -s default
+fi
