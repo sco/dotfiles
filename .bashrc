@@ -134,3 +134,6 @@ export PATH=/home/sco/.opencode/bin:$PATH
 
 # dotfiles management
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# SSH shortcuts
+alias maxi='ssh sco@raymond-maxi'

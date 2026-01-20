@@ -15,10 +15,19 @@ This repo is meant for use with "dotfiles"(TODO link). To manage dotfiles, use c
 
     dotfiles add ~/.zshrc ~/.config/nvim/init.lua
     dotfiles commit -m "Add shell and Neovim config"
+    
+To set up a new machine, install git and add your SSH key to Github. Then:
+
+    git clone --bare git@github.com:sco/dotfiles.git ~/.dotfiles
+    alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+    dotfiles config --local status.showUntrackedFiles no
+    dotfiles checkout
 
 
 ### connecting to other machines
-- `tailscale status
-- `ssh sco@raymond-maxi`
+
+    tailscale status
+    ssh sco@raymond-maxi
+    tmux attach -t default
 
 - 
