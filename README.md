@@ -1,42 +1,114 @@
-# sco's .dotfiles
+# sco's dotfiles
 
-This is my .dotfiles and standard home dir agent setup.
+Portable dotfiles using the bare git repo method. Works on Arch, NixOS, and anything with bash.
 
-## Contents
+## Structure
 
-- README.md - this file
-- AGENT.md - advice for agents
-- .bashrc - config
+```
+.shell.common   # Portable config: PATH, aliases, prompt (sourced everywhere)
+.shell.local    # Machine-specific overrides (not tracked, optional)
+.bashrc         # Arch: sources .shell.common
+.profile        # Arch: login shell, sources .bashrc
+.gitconfig      # Git identity and preferences
+bin/            # Scripts added to PATH
+```
 
+## Installation
 
-### dotfiles
+### Any machine (Arch, Ubuntu, etc.)
 
-This repo is meant for use with "dotfiles"(TODO link). To manage dotfiles, use commands like:
+```bash
+git clone --bare git@github.com:sco/dotfiles.git ~/.dotfiles
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles config --local status.showUntrackedFiles no
+dotfiles checkout
+```
 
-    dotfiles add ~/.zshrc ~/.config/nvim/init.lua
-    dotfiles commit -m "Add shell and Neovim config"
-    
-To set up a new machine, install git and add your SSH key to Github. Then:
+If checkout complains about existing files, back them up first:
+```bash
+mkdir -p ~/.dotfiles-backup
+dotfiles checkout 2>&1 | grep -E "^\s+" | awk '{print $1}' | xargs -I{} mv {} ~/.dotfiles-backup/
+dotfiles checkout
+```
 
-    git clone --bare git@github.com:sco/dotfiles.git ~/.dotfiles
-    alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-    dotfiles config --local status.showUntrackedFiles no
-    dotfiles checkout
+### NixOS with Home Manager
 
+On NixOS, Home Manager owns `.bashrc` and `.profile`. Instead of checking those out, configure Home Manager to source `.shell.common`:
 
-### connecting to other machines
+1. Clone the bare repo (same as above):
+   ```bash
+   git clone --bare git@github.com:sco/dotfiles.git ~/.dotfiles
+   alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+   dotfiles config --local status.showUntrackedFiles no
+   ```
 
-    tailscale status
-    ssh sco@raymond-maxi
-    tmux ls
-    tmux attach -t default
+2. Checkout only non-conflicting files:
+   ```bash
+   dotfiles checkout .shell.common .gitconfig bin/
+   ```
 
--### Further home environment setup
+3. Configure `~/.config/home-manager/home.nix`:
+   ```nix
+   home.sessionVariables = {
+     PATH = "$HOME/.npm-global/bin:$HOME/bin:$PATH";
+   };
 
-    gh auth login
+   programs.bash = {
+     enable = true;
+     initExtra = ''
+       # Source portable dotfiles config
+       [[ -f ~/.shell.common ]] && source ~/.shell.common
+       
+       # Auto-attach to tmux for SSH sessions
+       if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+         tmux attach-session -t main || tmux new-session -s main
+       fi
+     '';
+   };
 
-### checking out a project repo
+   programs.tmux = {
+     enable = true;
+     # ... your tmux config
+   };
+   ```
 
-    gh repo clone furnisher
+4. Apply: `home-manager switch`
 
- 
+## Usage
+
+```bash
+# Add a file
+dotfiles add ~/.config/something
+
+# Commit
+dotfiles commit -m "Add something config"
+
+# Push
+dotfiles push
+
+# Pull on another machine
+dotfiles pull
+```
+
+## Machine-local overrides
+
+Create `~/.shell.local` for machine-specific config (not tracked):
+```bash
+# Example: machine-specific aliases or env vars
+export EDITOR=nvim
+alias proj='cd ~/work/myproject'
+```
+
+## SSH shortcuts
+
+```bash
+tailscale status        # See machines
+ssh sco@raymond-maxi    # Or just: maxi (alias)
+tmux attach -t main     # Attach to session
+```
+
+## Other setup
+
+```bash
+gh auth login           # GitHub CLI
+```

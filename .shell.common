@@ -1,0 +1,43 @@
+# ~/.shell.common - Portable shell config sourced by all machines
+# This file is sourced by .bashrc (Arch) or Home Manager (NixOS)
+
+# History
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=20000
+shopt -s histappend
+
+# Better navigation
+shopt -s checkwinsize
+shopt -s globstar 2>/dev/null
+
+# Colors
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# Prompt (simple, works everywhere)
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# ─── PATH additions ───────────────────────────────────────────────
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# ─── Aliases ──────────────────────────────────────────────────────
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias maxi='ssh sco@raymond-maxi'
+
+# Source machine-local overrides if present
+[[ -f ~/.shell.local ]] && source ~/.shell.local
