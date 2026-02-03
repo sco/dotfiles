@@ -1,0 +1,34 @@
+# Caches and generated
+.cache/
+.bun/
+.npm/
+.local/
+.config/google-chrome/
+.config/chromium/
+
+# Secrets (handle separately)
+.secrets/
+.ssh/
+.gnupg/
+
+# OpenClaw internal
+.openclaw/agents/
+.openclaw/*.json
+.openclaw/workspace/medina/
+.openclaw/workspace/yoga-practice-app/
+.openclaw/workspace/dotfiles/
+.openclaw/workspace/skills/
+.openclaw/workspace/memory/
+
+# Misc
+*.backup*
+.node_repl_history
+.bash_history
+Desktop/
+Downloads/
+Documents/
+Music/
+Pictures/
+Videos/
+Templates/
+Public/
