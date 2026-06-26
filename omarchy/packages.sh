@@ -7,6 +7,8 @@ sudo pacman -Rns --noconfirm libreoffice-fresh typora xournalpp 2>/dev/null || t
 echo "==> Installing additional packages..."
 yay -S --noconfirm \
   avahi \
+  bun \
+  garage \
   libsecret \
   linux-zen \
   linux-zen-headers \
