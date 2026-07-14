@@ -56,6 +56,24 @@
       exec firefox "$@"
     '')
 
+    (writeShellScriptBin "hypr-send-shortcut-once" ''
+      mods=''${1:?mods required}
+      key=''${2:?key required}
+
+      if hyprctl dispatch "hl.dsp.send_key_state({ mods = \"$mods\", key = \"$key\", state = \"down\", window = \"activewindow\" })"; then
+        sleep 0.05
+        hyprctl dispatch "hl.dsp.send_key_state({ mods = \"$mods\", key = \"$key\", state = \"up\", window = \"activewindow\" })"
+      else
+        hyprctl dispatch sendshortcut "$mods, $key, activewindow"
+      fi
+    '')
+
+    (writeShellScriptBin "clipboard-menu" ''
+      selection="$(cliphist list | fuzzel --dmenu --prompt "Clipboard> ")" || exit 0
+      [[ -n "$selection" ]] || exit 0
+      printf '%s' "$selection" | cliphist decode | wl-copy
+    '')
+
     (writeShellScriptBin "launcher-refresh" ''
       rm -f "$HOME/.cache/wofi-drun"
     '')

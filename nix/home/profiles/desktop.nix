@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     anki-bin
     btop
+    cliphist
     dunst
     eza
     fuzzel
@@ -26,6 +27,18 @@
         y = 8;
       };
       font.size = 11;
+      keyboard.bindings = [
+        {
+          key = "Insert";
+          mods = "Control";
+          action = "Copy";
+        }
+        {
+          key = "Insert";
+          mods = "Shift";
+          action = "Paste";
+        }
+      ];
     };
   };
 
@@ -66,6 +79,32 @@
         radius = 8;
       };
     };
+  };
+
+  systemd.user.services.cliphist-text = {
+    Unit = {
+      Description = "Clipboard history for text";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  systemd.user.services.cliphist-image = {
+    Unit = {
+      Description = "Clipboard history for images";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
   };
 
   services.dunst = {
