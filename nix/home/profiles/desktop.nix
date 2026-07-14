@@ -6,6 +6,7 @@
     btop
     dunst
     eza
+    fuzzel
     fzf
     hyprpicker
     jq
@@ -14,7 +15,6 @@
     tldr
     awww
     wl-clipboard
-    wofi
     zoxide
   ];
 
@@ -41,6 +41,31 @@
       fd
       tree-sitter
     ];
+  };
+
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        terminal = "alacritty -e";
+        layer = "overlay";
+        width = 48;
+        lines = 12;
+        tabs = 4;
+      };
+      colors = {
+        background = "181818f2";
+        text = "d6d6d6ff";
+        match = "8aadf4ff";
+        selection = "2a2a2aff";
+        selection-text = "ffffffff";
+        border = "8aadf4ff";
+      };
+      border = {
+        width = 1;
+        radius = 8;
+      };
+    };
   };
 
   services.dunst = {

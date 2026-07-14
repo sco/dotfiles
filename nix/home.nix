@@ -55,6 +55,10 @@
 
       exec firefox "$@"
     '')
+
+    (writeShellScriptBin "launcher-refresh" ''
+      rm -f "$HOME/.cache/wofi-drun"
+    '')
   ];
 
   # Notification daemon: dunst is in NixOS config
@@ -65,7 +69,10 @@
     "$HOME/.npm-global/bin"
   ];
 
-  home.shellAliases = { };
+  home.shellAliases = {
+    vi = "nvim";
+    vim = "nvim";
+  };
 
   programs.bash = {
     enable = true;

@@ -17,7 +17,6 @@
     awww
     wl-clipboard
     wlogout
-    wofi
     pear-desktop
   ];
 }
