@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./home/profiles/monitors.nix
+    ./home/profiles/desktop.nix
+  ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "sco";
@@ -21,9 +26,7 @@
 
   # User packages
   home.packages = with pkgs; [
-    wofi  # App launcher for Wayland/Hyprland
     libnotify  # notify-send
-    anki-bin
 
     # Claude Code wrapper
     (writeShellScriptBin "claude" ''
@@ -32,6 +35,10 @@
       else
         exec nix run github:sadjow/claude-code-nix#claude-code-bun "$@"
       fi
+    '')
+
+    (writeShellScriptBin "nrs" ''
+      exec sudo nixos-rebuild switch --flake path:/home/sco/nix#mini "$@"
     '')
   ];
 
@@ -43,9 +50,7 @@
     "$HOME/.npm-global/bin"
   ];
 
-  home.shellAliases = {
-    vim = "nvim";
-  };
+  home.shellAliases = { };
 
   programs.bash = {
     enable = true;

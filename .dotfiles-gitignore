@@ -3,6 +3,12 @@
 .bun/
 .npm/
 .local/
+.bashrc
+.bash_profile
+.profile
+.config/dunst/
+.config/hypr/monitors.conf
+.config/systemd/user/
 .config/google-chrome/
 .config/chromium/
 

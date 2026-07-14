@@ -1,29 +1,39 @@
 # dotfiles
 
-Personal config for an [Omarchy](https://omarchy.org) machine.
+Personal config for `sco` machines.
 
-## Setup
+## Current NixOS Setup
 
-```bash
-bash omarchy/install.sh
+This machine is `mini`.
+
+The active NixOS/Home Manager config lives in:
+
+```sh
+~/nix
 ```
 
-This will:
-- Symlink `.shell.common` and `.gitconfig` into `$HOME`
-- Remove unwanted Omarchy defaults (libreoffice, typora, xournalpp)
-- Install additional packages (tailscale, zen-browser, linux-zen, etc.)
-- Install custom webapps (Medina Shelley, Tailscale, gmail)
-- Copy `omarchy/hypr/bindings.conf` to `~/.config/hypr/`
+Use this to apply changes:
 
-## Keybindings
+```sh
+nrs
+```
 
-Custom additions on top of Omarchy defaults live in `omarchy/hypr/bindings.conf`.
-Notable custom binding: `Alt+Space` → ostt (speech-to-text paste).
+`nrs` is a Home Manager helper for:
 
-Running `omarchy refresh hyprland` will overwrite the live bindings.conf — re-run
-`bash omarchy/install.sh` (or just the final `cp` line) to restore it.
+```sh
+sudo nixos-rebuild switch --flake path:/home/sco/nix#mini
+```
 
-## Other directories
+`/etc/nixos` is old/bootstrap config, not the source of truth.
 
-- `bin/` — personal scripts
-- `nix/` — Home Manager config (NixOS machines)
+## Layout
+
+- `nix/` - NixOS and Home Manager config
+- `.config/hypr/` - Hyprland config and local keybindings
+- `.config/quickshell/` - Quickshell config
+- `bin/` - personal scripts
+- `.shell.common` - portable shell additions sourced by Home Manager
+
+## Omarchy
+
+Older Omarchy setup notes and files may still exist in this repo. They are now reference material, not the active source of truth for `mini`.
