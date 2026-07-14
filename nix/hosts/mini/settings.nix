@@ -6,6 +6,6 @@
   # This generic rule applies to the current/default monitor. Replace the
   # leading comma with a connector name from `hyprctl monitors` if needed.
   hyprlandMonitors = [
-    ",preferred,auto,1,transform,1"
+    ",preferred,auto,1.5,transform,1"
   ];
 }
