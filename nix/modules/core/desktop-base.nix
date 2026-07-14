@@ -8,6 +8,9 @@
   };
 
   programs.firefox.enable = true;
+  programs._1password.enable = true;
+  programs._1password-gui.enable = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

@@ -40,6 +40,14 @@
     (writeShellScriptBin "nrs" ''
       exec sudo nixos-rebuild switch --flake path:/home/sco/nix#mini "$@"
     '')
+
+    (writeShellScriptBin "browser" ''
+      if command -v zen-browser >/dev/null 2>&1; then
+        exec zen-browser "$@"
+      fi
+
+      exec firefox "$@"
+    '')
   ];
 
   # Notification daemon: dunst is in NixOS config
