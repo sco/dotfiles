@@ -27,6 +27,19 @@
       specialArgs = {
         inherit inputs username hostname hostSettings;
       };
+      mkHome =
+        {
+          name,
+          user ? name,
+          modules,
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = specialArgs // {
+            username = user;
+          };
+          modules = modules;
+        };
     in
     {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
@@ -45,10 +58,34 @@
         ];
       };
 
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = specialArgs;
-        modules = [ ./home.nix ];
+      homeConfigurations = {
+        ${username} = mkHome {
+          name = username;
+          user = username;
+          modules = [ ./home.nix ];
+        };
+
+        sco-sandbox = mkHome {
+          name = "sco-sandbox";
+          user = "sco";
+          modules = [ ./home/sandbox.nix ];
+        };
+
+        root-sandbox = mkHome {
+          name = "root-sandbox";
+          user = "root";
+          modules = [ ./home/sandbox.nix ];
+        };
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          home-manager
+          git
+          gh
+          jq
+          nix
+        ];
       };
     };
 }
