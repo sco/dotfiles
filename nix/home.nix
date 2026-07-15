@@ -113,6 +113,159 @@
     vim = "nvim";
   };
 
+  xdg.enable = true;
+
+  home.file = {
+    ".local/share/applications/nvim.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Neovim
+      GenericName=Text Editor
+      Comment=Edit text files
+      Exec=alacritty -e nvim %F
+      Icon=nvim
+      Terminal=false
+      Categories=Utility;TextEditor;Development;
+      MimeType=text/plain;text/x-makefile;text/x-c++;text/x-c;text/x-shellscript;application/x-shellscript;
+    '';
+
+    ".local/share/applications/com.github.th_ch.youtube_music.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=YouTube Music
+      Exec=pear-desktop %u
+      Icon=pear-desktop
+      StartupWMClass=com.github.th_ch.youtube_music
+      Categories=AudioVideo;Audio;Player;
+    '';
+
+    ".local/share/applications/x.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=X
+      Exec=browser --new-window https://x.com
+      Icon=browser
+      Terminal=false
+      Categories=Network;
+    '';
+
+    ".local/share/applications/github.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=GitHub
+      Exec=browser --new-window https://github.com
+      Icon=browser
+      Terminal=false
+      Categories=Development;Network;
+    '';
+
+    ".local/share/applications/gmail.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Gmail
+      Exec=browser --new-window https://mail.google.com
+      Icon=browser
+      Terminal=false
+      Categories=Network;Email;
+    '';
+
+    ".local/share/applications/google-calendar.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Google Calendar
+      Exec=browser --new-window https://calendar.google.com
+      Icon=browser
+      Terminal=false
+      Categories=Office;Calendar;Network;
+    '';
+
+    ".local/share/applications/medina.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Medina
+      Exec=sh -lc 'set -a; [ -f "$HOME/.config/medina/.env" ] && . "$HOME/.config/medina/.env"; set +a; browser --new-window "''${MEDINA_ENDPOINT:-''${MEDINA_ROOT:-http://localhost:3002}}"'
+      Icon=browser
+      Terminal=false
+      Categories=Network;Audio;
+    '';
+
+    ".local/share/applications/Alacritty.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/anki.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/btop.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/com.google.Chrome.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/cups.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/firefox.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/google-chrome.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/gvim.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/nixos-manual.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/org.freedesktop.Xwayland.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/org.quickshell.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/satty.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/vim.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/xdg-desktop-portal-gtk.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+    ".local/share/applications/xterm.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Hidden=true
+    '';
+  };
+
   programs.bash = {
     enable = true;
     initExtra = ''
