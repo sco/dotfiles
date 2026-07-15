@@ -5,7 +5,6 @@
   # and wallpapers in Home Manager or a separate dotfiles repo.
   environment.systemPackages = with pkgs; [
     brightnessctl
-    dunst
     grim
     hypridle
     hyprlock

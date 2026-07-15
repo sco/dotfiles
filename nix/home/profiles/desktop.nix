@@ -1,16 +1,29 @@
 { pkgs, ... }:
 
+let
+  theme = {
+    background = "#1a1b26";
+    foreground = "#a9b1d6";
+    accent = "#7aa2f7";
+    selectionBackground = "#32344a";
+    muted = "#444b6a";
+    warning = "#e0af68";
+    urgent = "#f7768e";
+  };
+  fuzzelColor = hex: alpha: builtins.substring 1 6 hex + alpha;
+in
+
 {
   home.packages = with pkgs; [
     anki-bin
     btop
     cliphist
-    dunst
     eza
     fuzzel
     fzf
     hyprpicker
     jq
+    mako
     quickshell
     starship
     tldr
@@ -27,6 +40,40 @@
         y = 8;
       };
       font.size = 11;
+      colors = {
+        primary = {
+          background = "0x1a1b26";
+          foreground = "0xa9b1d6";
+        };
+        cursor = {
+          text = "0x1a1b26";
+          cursor = "0xc0caf5";
+        };
+        selection = {
+          text = "0xc0caf5";
+          background = "0x32344a";
+        };
+        normal = {
+          black = "0x32344a";
+          red = "0xf7768e";
+          green = "0x9ece6a";
+          yellow = "0xe0af68";
+          blue = "0x7aa2f7";
+          magenta = "0xad8ee6";
+          cyan = "0x449dab";
+          white = "0x787c99";
+        };
+        bright = {
+          black = "0x444b6a";
+          red = "0xff7a93";
+          green = "0xb9f27c";
+          yellow = "0xff9e64";
+          blue = "0x7da6ff";
+          magenta = "0xbb9af7";
+          cyan = "0x0db9d7";
+          white = "0xacb0d0";
+        };
+      };
       keyboard.bindings = [
         {
           key = "Insert";
@@ -67,12 +114,12 @@
         tabs = 4;
       };
       colors = {
-        background = "181818f2";
-        text = "d6d6d6ff";
-        match = "8aadf4ff";
-        selection = "2a2a2aff";
+        background = fuzzelColor theme.background "f2";
+        text = fuzzelColor theme.foreground "ff";
+        match = fuzzelColor theme.accent "ff";
+        selection = fuzzelColor theme.selectionBackground "ff";
         selection-text = "ffffffff";
-        border = "8aadf4ff";
+        border = fuzzelColor theme.accent "ff";
       };
       border = {
         width = 1;
@@ -107,15 +154,35 @@
     Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  services.dunst = {
+  services.mako = {
     enable = true;
     settings = {
-      global = {
-        corner_radius = 8;
-        frame_width = 1;
-        offset = "16x16";
-        origin = "top-right";
-        transparency = 8;
+      anchor = "top-right";
+      background-color = theme.background;
+      border-color = theme.accent;
+      border-radius = 8;
+      border-size = 2;
+      default-timeout = 5000;
+      font = "sans-serif 14";
+      height = 120;
+      max-icon-size = 32;
+      outer-margin = 20;
+      padding = "10,15";
+      text-color = theme.foreground;
+      width = 420;
+
+      "mode=do-not-disturb" = {
+        invisible = true;
+      };
+
+      "mode=do-not-disturb app-name=notify-send" = {
+        invisible = false;
+      };
+
+      "urgency=critical" = {
+        border-color = theme.urgent;
+        default-timeout = 0;
+        layer = "overlay";
       };
     };
   };

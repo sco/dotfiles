@@ -69,12 +69,38 @@
       printf '%s' "$selection" | cliphist decode | wl-copy
     '')
 
+    (writeShellScriptBin "desktop-menu" ''
+      choice="$(
+        printf '%s\n' \
+          "Clipboard history" \
+          "Screenshot region" \
+          "Color picker" \
+          "Keybindings" \
+          "Restart bar" \
+          "Reload Hyprland" \
+          "Rebuild NixOS" \
+          "Lock" |
+          fuzzel --dmenu --prompt "Desktop> "
+      )" || exit 0
+
+      case "$choice" in
+        "Clipboard history") exec clipboard-menu ;;
+        "Screenshot region") exec sh -c 'grim -g "$(slurp)" - | satty --filename -' ;;
+        "Color picker") exec sh -c 'pkill hyprpicker || hyprpicker -a' ;;
+        "Keybindings") exec notify-send "Hyprland Keys" "Super+Space: Launcher\nSuper+Alt+Space: Menu\nSuper+Enter: Terminal\nSuper+Shift+Enter: Browser\nSuper+C/V/X: Copy/Paste/Cut\nSuper+Ctrl+V: Clipboard history\nSuper+W: Close\nSuper+F: Fullscreen\nSuper+T: Float\nSuper+Shift+Arrow: Swap windows" ;;
+        "Restart bar") exec sh -c 'pkill -f quickshell || true; qs --no-duplicate --daemonize' ;;
+        "Reload Hyprland") exec hyprctl reload ;;
+        "Rebuild NixOS") exec alacritty -e nrs ;;
+        "Lock") exec hyprlock ;;
+      esac
+    '')
+
     (writeShellScriptBin "launcher-refresh" ''
       rm -f "$HOME/.cache/wofi-drun"
     '')
   ];
 
-  # Notification daemon: dunst is in NixOS config
+  # Notification daemon: mako is managed by the desktop Home Manager profile.
 
   # Ensure Home Manager packages are in PATH
   home.sessionPath = [
