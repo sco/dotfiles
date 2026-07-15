@@ -69,6 +69,37 @@
       printf '%s' "$selection" | cliphist decode | wl-copy
     '')
 
+    (writeShellScriptBin "app-menu" ''
+      choice="$(
+        printf '%s\n' \
+          "Neovim" \
+          "X" \
+          "GitHub" \
+          "Gmail" \
+          "Google Calendar" \
+          "Medina" \
+          "YouTube Music" \
+          "1Password" |
+          fuzzel --dmenu --prompt "Open> "
+      )" || exit 0
+
+      case "$choice" in
+        "Neovim") exec alacritty -e nvim ;;
+        "X") exec browser --new-window https://x.com ;;
+        "GitHub") exec browser --new-window https://github.com ;;
+        "Gmail") exec browser --new-window https://mail.google.com ;;
+        "Google Calendar") exec browser --new-window https://calendar.google.com ;;
+        "Medina")
+          set -a
+          [[ -f "$HOME/.config/medina/.env" ]] && . "$HOME/.config/medina/.env"
+          set +a
+          exec browser --new-window "''${MEDINA_ENDPOINT:-''${MEDINA_ROOT:-http://localhost:3002}}"
+          ;;
+        "YouTube Music") exec pear-desktop ;;
+        "1Password") exec 1password ;;
+      esac
+    '')
+
     (writeShellScriptBin "desktop-menu" ''
       choice="$(
         printf '%s\n' \
