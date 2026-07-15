@@ -60,12 +60,7 @@
       mods=''${1:?mods required}
       key=''${2:?key required}
 
-      if hyprctl dispatch "hl.dsp.send_key_state({ mods = \"$mods\", key = \"$key\", state = \"down\", window = \"activewindow\" })"; then
-        sleep 0.05
-        hyprctl dispatch "hl.dsp.send_key_state({ mods = \"$mods\", key = \"$key\", state = \"up\", window = \"activewindow\" })"
-      else
-        hyprctl dispatch sendshortcut "$mods, $key, activewindow"
-      fi
+      hyprctl dispatch sendshortcut "$mods, $key, activewindow"
     '')
 
     (writeShellScriptBin "clipboard-menu" ''
